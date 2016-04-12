@@ -196,7 +196,7 @@ filetype plugin indent on
 
 
 "======================================== 
-"set config
+"   set config
 "======================================== 
 
 "==================================================
@@ -242,7 +242,6 @@ au BufRead,BufNewFile,BufEnter * cd %:p:h
 " set bsdir=buffer
 " set autochdir
 
-" ===================================================
 "session setting
 
 " "sessionoptions设置MS UNIX通用
@@ -257,6 +256,7 @@ au BufRead,BufNewFile,BufEnter * cd %:p:h
 
 " autocmd VimEnter * nested if argc() == 0 && filereadable($VIM . "/vimsession/Session.vim") |
 "     \ execute "source " . $VIM . "/vimsession/Session.vim"
+
 "==================================================
 "   UI
 "==================================================
@@ -349,7 +349,7 @@ if has('persistent_undo')
   set undodir=~/.undodir/
 endif
 "==================================================
-" key mappings:customized keys
+"   key mappings:customized keys
 "==================================================
 set scrolloff=7
 " Leader key is comma
@@ -443,7 +443,7 @@ cnoremap pls PluginList
 nnoremap <c-]> I"<esc>
 nnoremap <C-n> :NERDTreeToggle<CR>
 "==================================================
-"styles hignlight
+"   styles hignlight
 "==================================================
 " hi! link SignColumn   LineNr
 " hi! link ShowMarksHLl DiffAdd
@@ -461,13 +461,13 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 
 
 "==================================================
-" Plugins Config
+"   Plugins Config
 "==================================================
 "
 "
 "
 "==================================================
-" airline config
+"   airline config
 "==================================================
   let g:airline_detect_spell=1
 
@@ -496,7 +496,7 @@ let g:airline_theme='light'
  
   let g:airline#extensions#bufferline#enabled = 0
 "==================================================
-" nerdtree-git-plugin config 
+"   nerdtree-git-plugin config 
 "==================================================
 " let g:NERDTreeIndicatorMapCustom = {
 "     \ "Modified"  : "✹",
@@ -511,14 +511,14 @@ let g:airline_theme='light'
 "     \ }
 
 "==================================================
-" emmet config 
+"    emmet config 
 "==================================================
 let g:user_emmet_leader_key='<C-e>' " c-e , 连打，注意逗号别忘记
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 "==================================================
-" neocompletecache config 
+"    neocompletecache config 
 "==================================================
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
@@ -612,18 +612,13 @@ let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 "==================================================
-" vim-javascript config 
-"==================================================
-"let g:tern_show_argument_hints = 'on_move'
-"
-"==================================================
-" AutoPairs config 
+"    AutoPairs config 
 "==================================================
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<C-S-B>'
 
 "==================================================
-" easymotion config 
+"    easymotion config 
 "==================================================
 map <Leader><leader>h <Plug>(easymotion-linebackward)
 map <Leader><leader>l <Plug>(easymotion-lineforward)
@@ -638,7 +633,7 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 "==================================================
-" incsearch config 
+"   incsearch config 
 "==================================================
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -655,7 +650,7 @@ map g# <Plug>(incsearch-nohl-g#)
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
 "==================================================
-" incsearch-fuzzy config 
+"   incsearch-fuzzy config 
 "==================================================
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
