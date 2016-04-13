@@ -1,6 +1,6 @@
-"======================================== 
+"========================================
 "   SYSTEM
-"======================================== 
+"========================================
 "判定当前操作系统类型
 if has("win32") || has("win32unix")
     let g:OS#name = "win"
@@ -39,31 +39,31 @@ elseif g:OS#mac
 endif
 
 if g:OS#win
-	 " MyDiff 
-	set diffexpr=MyDiff()
-	function! MyDiff()
-		  let opt = '-a --binary '
-		  if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
-		  if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
-		  let arg1 = v:fname_in
-		  if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
-		  let arg2 = v:fname_new
-		  if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
-		  let arg3 = v:fname_out
-		  if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
-		  let eq = ''
-		  if $VIMRUNTIME =~ ' '
-			if &sh =~ '\<cmd'
-			  let cmd = '""' . $VIMRUNTIME . '\diff"'
-			  let eq = '"'
-			else
-			  let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
-			endif
-		  else
-			let cmd = $VIMRUNTIME . '\diff'
-		  endif
-		  silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
-	endfunction
+    " MyDiff
+    set diffexpr=MyDiff()
+    function! MyDiff()
+        let opt = '-a --binary '
+        if &diffopt =~ 'icase' | let opt = opt . '-i ' | endif
+        if &diffopt =~ 'iwhite' | let opt = opt . '-b ' | endif
+        let arg1 = v:fname_in
+        if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
+        let arg2 = v:fname_new
+        if arg2 =~ ' ' | let arg2 = '"' . arg2 . '"' | endif
+        let arg3 = v:fname_out
+        if arg3 =~ ' ' | let arg3 = '"' . arg3 . '"' | endif
+        let eq = ''
+        if $VIMRUNTIME =~ ' '
+            if &sh =~ '\<cmd'
+                let cmd = '""' . $VIMRUNTIME . '\diff"'
+                let eq = '"'
+            else
+                let cmd = substitute($VIMRUNTIME, ' ', '" ', '') . '\diff"'
+            endif
+        else
+            let cmd = $VIMRUNTIME . '\diff'
+        endif
+        silent execute '!' . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+    endfunction
 endif
 
 " Win平台下窗口全屏组件 gvimfullscreen.dll
@@ -102,18 +102,18 @@ if has('gui_running') && has('gui_win32') && has('libcall')
     "映射 Alt+Enter 切换全屏vim
     map <a-enter> <esc>:call ToggleFullScreen()<cr>
     "切换Vim是否在最前面显示
-    nmap <s-r> <esc>:call SwitchVimTopMostMode()<cr>
+    nmap <a-c-right> <esc>:call SwitchVimTopMostMode()<cr>
     "增加Vim窗体的不透明度
-    nmap <s-t> <esc>:call SetAlpha(10)<cr>
+    nmap <a-c-up> <esc>:call SetAlpha(10)<cr>
     "增加Vim窗体的透明度
-    nmap <s-y> <esc>:call SetAlpha(-10)<cr>
+    nmap <a-c-down> <esc>:call SetAlpha(-10)<cr>
     " 默认设置透明
     autocmd GUIEnter * call libcallnr(g:MyVimLib, 'SetAlpha', g:VimAlpha)
 endif
 
 "配置文件自动载入
 if g:OS#win
-   " autocmd! bufwritepost source $VIM/_vimrc %
+    " autocmd! bufwritepost source $VIM/_vimrc %
     augroup reload_vimrc " {
         autocmd!
         autocmd BufWritePost $MYVIMRC source $MYVIMRC
@@ -123,11 +123,11 @@ elseif g:OS#uinx
 elseif g:OS#mac
     autocmd! bufwritepost source $HOME/.vimrc %
 endif
-"======================================== 
+"========================================
 "Vundel Plugins
-"======================================== 
+"========================================
 set nocompatible
- 
+
 "Vundle设置
 set rtp+=$VIUMFILES/bundle/Vundle.vim/
 let path='$VIUMFILES/bundle'
@@ -138,13 +138,14 @@ Plugin 'gmarik/Vundle.vim'
 " ui
 Plugin 'Lucius'
 Plugin 'kshenoy/vim-signature'
-
-
-"Plugin 'bling/vim-airline'
+Plugin 'lilydjwg/colorizer'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'bling/vim-bufferline'
-
+Plugin 'ntpeters/vim-better-whitespace'
 
 " git
 Plugin 'airblade/vim-gitgutter'
@@ -161,26 +162,32 @@ Plugin 'scrooloose/nerdtree'
 "coding
 Plugin 'mbbill/undotree'
 Plugin 'tpope/vim-commentary'
+Plugin 'Chiel92/vim-autoformat'
 "syntax
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
 "complete
 Plugin 'mattn/emmet-vim'
-" Plugin 'ternjs/tern_for_vim'
+Plugin 'ternjs/tern_for_vim'
 Plugin 'Shougo/neocomplcache.vim'
 "Plugin 'Valloric/YouCompleteMe'
 
+" movement
+Plugin 'unblevable/quick-scope'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'haya14busa/incsearch.vim'
+Plugin 'haya14busa/incsearch-fuzzy.vim'
+Plugin 'terryma/vim-multiple-cursors'
 
 "操作增强
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 Plugin 'jiangmiao/auto-pairs'
-Plugin 'easymotion/vim-easymotion'
-Plugin 'haya14busa/incsearch.vim'
-Plugin 'haya14busa/incsearch-fuzzy.vim'
-" nerdtree-git-plugin config 
+Plugin 'gcmt/wildfire.vim'
+Plugin 'godlygeek/tabular'
+" nerdtree-git-plugin config
 " "==================================================
-" 
+"
 call vundle#end()
 filetype plugin indent on
 
@@ -195,9 +202,9 @@ filetype plugin indent on
 
 
 
-"======================================== 
+"========================================
 "   set config
-"======================================== 
+"========================================
 
 "==================================================
 "   FILE
@@ -205,8 +212,8 @@ filetype plugin indent on
 "中文乱码
 "set fenc=utf-8
 "set fileencodings=utf-8,ucs-bom,cp936,gb18030,big5,euc-jp,euc-kr,latin1
-set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1  
-set fileencoding=utf-8  
+set fileencodings=ucs-bom,utf-8,cp936,gb18030,big5,euc-jp,euc-kr,latin1
+set fileencoding=utf-8
 set encoding=utf-8
 set termencoding=utf-8
 
@@ -216,7 +223,7 @@ if g:OS#win
     language messages zh_CN.utf-8
 endif
 "if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
-    "set ambiwidth=double
+"set ambiwidth=double
 "endif
 
 "新文件格式
@@ -231,7 +238,7 @@ filetype on
 
 "上次文件编辑位置
 if has("autocmd")
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
 " 自动切换目录为当前编辑文件所在目录
@@ -269,14 +276,14 @@ set ruler " show the current line number and column number
 set numberwidth=5
 set wrap
 set cursorline
-set history=100	" keep 100 lines of command line history
+set history=100 " keep 100 lines of command line history
 
 if has("win32")
     set guifont=DejaVu_Sans_Mono_for_Powerline:h12
 endif
 "set gfw=Microsoft\ Yahei\ Mono:h12:cGB2312
 
-set shortmess=atI                          
+set shortmess=atI
 
 set showmatch         " show matched brackets
 set mat=2             " How many tenths of a second to blink when matching brackets
@@ -291,12 +298,12 @@ set noshowmode     " Show current mode
 "set scrolloff=7    " Set 7 lines to the cursor - when moving vertically using j/k
 "隐藏菜单栏
 if g:OS#gui
-"set guioptions-=m " 隐藏菜单栏
-set guioptions-=T " 隐藏工具栏
-"set guioptions-=L " 隐藏左侧滚动条
-"set guioptions-=r " 隐藏右侧滚动条
-"set guioptions-=b " 隐藏底部滚动条
-"set showtabline=0 " 隐藏Tab栏
+    "set guioptions-=m " 隐藏菜单栏
+    set guioptions-=T " 隐藏工具栏
+    "set guioptions-=L " 隐藏左侧滚动条
+    "set guioptions-=r " 隐藏右侧滚动条
+    "set guioptions-=b " 隐藏底部滚动条
+    "set showtabline=0 " 隐藏Tab栏
 endif
 
 "默认窗口位置和大小
@@ -305,6 +312,7 @@ endif
 
 "代码高亮
 colorscheme Lucius
+" colorscheme monokai
 LuciusBlack
 syntax enable
 syntax on
@@ -328,7 +336,7 @@ if has('multi_byte_ime')
     set iminsert=0 imsearch=0
 endif
 "==================================================
-"   Other 
+"   Other
 "==================================================
 
 set nobackup
@@ -343,15 +351,17 @@ set magic      " For regular expressions turn magic on
 
 "create undo file
 if has('persistent_undo')
-  set undofile                " So is persistent undo ...
-  set undolevels=1000         " Maximum number of changes that can be undone
-  set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
-  set undodir=~/.undodir/
+    set undofile                " So is persistent undo ...
+    set undolevels=1000         " Maximum number of changes that can be undone
+    set undoreload=10000        " Maximum number lines to save for undo on a buffer reload
+    set undodir=~/.undodir/
 endif
+
+set scrolloff=7
 "==================================================
 "   key mappings:customized keys
 "==================================================
-set scrolloff=7
+nnoremap W :w<CR>
 " Leader key is comma
 let mapleader = ","
 
@@ -395,7 +405,7 @@ noremap L $
 "noremap Y y$
 
 "no Highlight
-noremap <silent><leader>/ :nohls<CR>
+"noremap <silent><leader>/ :nohls<CR>
 
 " I can type :help on my own, thanks.
 noremap <F1> <Esc>"
@@ -411,7 +421,7 @@ nnoremap <silent> g* g*zz
 "noremap m :bn<CR>
 "noremap M :bp<CR>
 " toggle between two buffers
-nnoremap t <C-^>
+" nnoremap t <C-^>
 
 " remap U to <C-r> for easier redo
 nnoremap U <C-r>
@@ -423,7 +433,7 @@ vnoremap > >gv
 " Move visual block
 "vnoremap J :m '>+1<CR>gv=gv
 "vnoremap K :m '<-2<CR>gv=gv
-nnoremap <Leader>w :w<cr>
+" nnoremap <Leader>w :w<cr>
 
 nnoremap <leader>f :<C-u>Unite file<CR>
 " Quickly cd to directory
@@ -437,11 +447,11 @@ nnoremap <leader>d :Unite -start-insert directory -profile-name=files<CR>
 " Select across all buffers
 nnoremap <leader>b :Unite -start-insert buffer<CR>
 
-"temp 
+"temp
 cnoremap pi PluginInstall
 cnoremap pls PluginList
 nnoremap <c-]> I"<esc>
-nnoremap <C-n> :NERDTreeToggle<CR>
+nnoremap <c-f2> :NERDTreeToggle<CR>
 "==================================================
 "   styles hignlight
 "==================================================
@@ -469,22 +479,22 @@ nnoremap <C-n> :NERDTreeToggle<CR>
 "==================================================
 "   airline config
 "==================================================
-  let g:airline_detect_spell=1
+let g:airline_detect_spell=1
 
- if !exists('g:airline_symbols')
+if !exists('g:airline_symbols')
     let g:airline_symbols = {}
- endif
+endif
 " powerline symbols
-  let g:airline_left_sep = ''
-  let g:airline_left_alt_sep = ''
-  let g:airline_right_sep = ''
-  let g:airline_right_alt_sep = ''
-  let g:airline_symbols.branch = ''
-  let g:airline_symbols.readonly = ''
-  let g:airline_symbols.linenr = ''
-  let g:airline_symbols.paste = 'ρ'
-  let g:airline_symbols.notexists = '∄'
-  let g:airline_symbols.whitespace = 'Ξ'
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.notexists = '∄'
+let g:airline_symbols.whitespace = 'Ξ'
 
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = '»'
@@ -493,10 +503,10 @@ let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
 "let g:airline_theme='dark'
 let g:airline_theme='light'
 "let g:airline_theme='molokai'
- 
-  let g:airline#extensions#bufferline#enabled = 0
+
+let g:airline#extensions#bufferline#enabled = 0
 "==================================================
-"   nerdtree-git-plugin config 
+"   nerdtree-git-plugin config
 "==================================================
 " let g:NERDTreeIndicatorMapCustom = {
 "     \ "Modified"  : "✹",
@@ -511,14 +521,14 @@ let g:airline_theme='light'
 "     \ }
 
 "==================================================
-"    emmet config 
+"    emmet config
 "==================================================
 let g:user_emmet_leader_key='<C-e>' " c-e , 连打，注意逗号别忘记
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
 
 "==================================================
-"    neocompletecache config 
+"    neocompletecache config
 "==================================================
 "Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
 " Disable AutoComplPop.
@@ -539,10 +549,10 @@ let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
 " Define dictionary.
 let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : '',
-    \ 'vimshell' : $HOME.'/.vimshell_hist',
-    \ 'scheme' : $HOME.'/.gosh_completions'
-        \ }
+            \ 'default' : '',
+            \ 'vimshell' : $HOME.'/.vimshell_hist',
+            \ 'scheme' : $HOME.'/.gosh_completions'
+            \ }
 
 " Define keyword.
 if !exists('g:neocomplcache_keyword_patterns')
@@ -558,9 +568,9 @@ inoremap <expr><C-l>     neocomplcache#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplcache#smart_close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
+    return neocomplcache#smart_close_popup() . "\<CR>"
+    " For no inserting <CR> key.
+    "return pumvisible() ? neocomplcache#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -600,7 +610,7 @@ autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
 if !exists('g:neocomplcache_force_omni_patterns')
-  let g:neocomplcache_force_omni_patterns = {}
+    let g:neocomplcache_force_omni_patterns = {}
 endif
 let g:neocomplcache_force_omni_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 let g:neocomplcache_force_omni_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
@@ -612,13 +622,13 @@ let g:neocomplcache_force_omni_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 
 "==================================================
-"    AutoPairs config 
+"    AutoPairs config
 "==================================================
 let g:AutoPairsFlyMode = 1
 let g:AutoPairsShortcutBackInsert = '<C-S-B>'
 
 "==================================================
-"    easymotion config 
+"    easymotion config
 "==================================================
 map <Leader><leader>h <Plug>(easymotion-linebackward)
 map <Leader><leader>l <Plug>(easymotion-lineforward)
@@ -633,7 +643,7 @@ map  <Leader><Leader>w <Plug>(easymotion-bd-w)
 nmap <Leader><Leader>w <Plug>(easymotion-overwin-w)
 
 "==================================================
-"   incsearch config 
+"   incsearch config
 "==================================================
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -650,8 +660,93 @@ map g# <Plug>(incsearch-nohl-g#)
 nnoremap <Esc><Esc> :<C-u>nohlsearch<CR>
 
 "==================================================
-"   incsearch-fuzzy config 
+"   incsearch-fuzzy config
 "==================================================
 map z/ <Plug>(incsearch-fuzzy-/)
 map z? <Plug>(incsearch-fuzzy-?)
 map zg/ <Plug>(incsearch-fuzzy-stay)
+
+"==================================================
+"   wildfire config
+"==================================================
+map <SPACE> <Plug>(wildfire-fuel)
+let g:wildfire_objects = {
+            \ "*" : ["i'", 'i"', "i)", "i]", "i}"]
+            \ }
+
+cal wildfire#triggers#Add("<ENTER>", {
+            \ "html,xml" : ["at", "it"],
+            \ })
+nmap <leader>s <Plug>(wildfire-quick-select)
+
+"==================================================
+"   wildfire config
+"==================================================
+let g:rbpt_colorpairs = [
+            \ ['brown',       'RoyalBlue3'],
+            \ ['Darkblue',    'SeaGreen3'],
+            \ ['darkgray',    'DarkOrchid3'],
+            \ ['darkgreen',   'firebrick3'],
+            \ ['darkcyan',    'RoyalBlue3'],
+            \ ['darkred',     'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['brown',       'firebrick3'],
+            \ ['gray',        'RoyalBlue3'],
+            \ ['black',       'SeaGreen3'],
+            \ ['darkmagenta', 'DarkOrchid3'],
+            \ ['Darkblue',    'firebrick3'],
+            \ ['darkgreen',   'RoyalBlue3'],
+            \ ['darkcyan',    'SeaGreen3'],
+            \ ['darkred',     'DarkOrchid3'],
+            \ ['red',         'firebrick3'],
+            \ ]
+"let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
+
+"==================================================
+"   multiple-cursors config
+"==================================================
+set selection=inclusive
+" let g:multi_cursor_use_default_mapping=1
+" Default mapping
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<Esc>'
+" Map start key separately from next key
+"let g:multi_cursor_start_key='<F6>'
+"
+" Called once right before you start selecting multiple cursors
+function! Multiple_cursors_before()
+    if exists(':NeoCompleteLock')==2
+        exe 'NeoCompleteLock'
+    endif
+endfunction
+
+" Called once only when the multiple selection is canceled (default <Esc>)
+function! Multiple_cursors_after()
+    if exists(':NeoCompleteUnlock')==2
+        exe 'NeoCompleteUnlock'
+    endif
+endfunction
+
+"==================================================
+"   quick-scope config
+"==================================================
+"" Trigger a highlight in the appropriate direction when pressing these keys:
+"let g:qs_highlight_on_keys = ['f', 'F']
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+"let g:qs_first_occurrence_highlight_color = '#afff5f' " gui vim
+let g:qs_first_occurrence_highlight_color = '#D15B03' " gui vim
+"let g:qs_first_occurrence_highlight_color = 155       " terminal vim
+"let g:qs_second_occurrence_highlight_color = '#5fffff'  " gui vim
+let g:qs_second_occurrence_highlight_color = '#D40CDB'  " gui vim
+"let g:qs_second_occurrence_highlight_color = 81         " terminal vim
+" Map the leader key + q to toggle quick-scope's highlighting in normal/visual mode.
+" Note that you must use nmap/vmap instead of their non-recursive versions (nnoremap/vnoremap).
+"nmap <leader>q <plug>(QuickScopeToggle)
+"vmap <leader>q <plug>(QuickScopeToggle)
