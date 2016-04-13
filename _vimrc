@@ -166,6 +166,7 @@ Plugin 'Chiel92/vim-autoformat'
 "syntax
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
+Plugin 'scrooloose/syntastic'
 "complete
 Plugin 'mattn/emmet-vim'
 Plugin 'ternjs/tern_for_vim'
@@ -750,3 +751,17 @@ let g:qs_second_occurrence_highlight_color = '#D40CDB'  " gui vim
 " Note that you must use nmap/vmap instead of their non-recursive versions (nnoremap/vnoremap).
 "nmap <leader>q <plug>(QuickScopeToggle)
 "vmap <leader>q <plug>(QuickScopeToggle)
+
+"==================================================
+"   syntastic config
+"==================================================
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+let g:airline#extensions#syntastic#enabled = 1
