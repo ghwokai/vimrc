@@ -137,19 +137,53 @@ Plugin 'gmarik/Vundle.vim'
 
 " ui
 Plugin 'Lucius'
+
+" display
 Plugin 'kshenoy/vim-signature'
 Plugin 'lilydjwg/colorizer'
-Plugin 'kien/rainbow_parentheses.vim'
+"Plugin 'kien/rainbow_parentheses.vim'
 Plugin 'Yggdroot/indentLine'
 Plugin 'Valloric/MatchTagAlways'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'bling/vim-bufferline'
+"Plugin 'bling/vim-bufferline'
 Plugin 'ntpeters/vim-better-whitespace'
 
+" fast move
+Plugin 'easymotion/vim-easymotion'
+Plugin 'unblevable/quick-scope'
+
+" fast edit
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'godlygeek/tabular'
+Plugin 'tpope/vim-repeat'
+Plugin 'gcmt/wildfire.vim'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdcommenter'
+"Plugin 'tpope/vim-commentary'
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'Chiel92/vim-autoformat'
+
+" tools
+"Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
+"Plug 'ruanyl/vim-eslint', {'do': 'npm install'}
+Plugin 'majutsushi/tagbar'
+Plugin 'plasticboy/vim-markdown'
+Plugin 'tpope/vim-obsession'
+Plugin 'dhruvasagar/vim-prosession'
+Plugin 'szw/vim-maximizer'
+Plugin 'MattesGroeger/vim-bookmarks'
+Plugin 'moll/vim-bbye'
+Plugin 'vim-scripts/BufOnly.vim'
+"Plug 'rking/ag.vim'
+"Plugin 'ruanyl/vim-caniuse'
 " git
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tpope/vim-fugitive'
+"Plugin 'junegunn/gv.vim'
 "Plugin 'Xuyuanp/nerdtree-git-plugin'
 
 
@@ -157,35 +191,31 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'Shougo/unite.vim'
 Plugin 'scrooloose/nerdtree'
 "Plugin 'ctrlpvim/ctrlp.vim'
+"Plug 'tacahiroy/ctrlp-funky'
+"Plug 'dyng/ctrlsf.vim', {'on': '<Plug>CtrlSFVwordExec'}
+"Plugin 'ggVGc/vim-fuzzysearch'
 
 
 "coding
 Plugin 'mbbill/undotree'
-Plugin 'tpope/vim-commentary'
-Plugin 'Chiel92/vim-autoformat'
+
 "syntax
 Plugin 'pangloss/vim-javascript'
 Plugin 'elzr/vim-json'
-Plugin 'scrooloose/syntastic'
+Plugin 'hail2u/vim-css3-syntax'
+Plugin 'othree/javascript-libraries-syntax.vim'
+
 "complete
 Plugin 'mattn/emmet-vim'
 Plugin 'ternjs/tern_for_vim'
 Plugin 'Shougo/neocomplcache.vim'
-"Plugin 'Valloric/YouCompleteMe'
 
 " movement
-Plugin 'unblevable/quick-scope'
-Plugin 'easymotion/vim-easymotion'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'haya14busa/incsearch-fuzzy.vim'
 Plugin 'terryma/vim-multiple-cursors'
 
 "操作增强
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'gcmt/wildfire.vim'
-Plugin 'godlygeek/tabular'
 " nerdtree-git-plugin config
 " "==================================================
 "
@@ -362,18 +392,18 @@ set scrolloff=7
 "==================================================
 "   key mappings:customized keys
 "==================================================
-nnoremap W :w<CR>
+nnoremap ; :
 " Leader key is comma
 let mapleader = ","
 
 " Tweak ESC to be 'jk' typed fast
 imap jk <ESC>
 " Do not disable it, since kinesis has cool remap to the left thumb
-" imap <ESC> <nop>
+" imap <ESC> <nop>uuu
 "}}}
 
 "编辑配置文件
-nmap <Leader>r :tabedit $MYVIMRC<CR>
+nmap <Leader>r :edit $MYVIMRC<CR>
 
 "与windows共享剪贴板
 set clipboard+=unnamed
@@ -448,6 +478,17 @@ nnoremap <leader>d :Unite -start-insert directory -profile-name=files<CR>
 " Select across all buffers
 nnoremap <leader>b :Unite -start-insert buffer<CR>
 
+
+if has('statusline')
+    set laststatus=2
+    set statusline=%<%f\                     " Filename
+    set statusline+=%w%h%m%r                 " Options
+    set statusline+=%{fugitive#statusline()} " Git Hotness
+    set statusline+=\ [%{&ff}/%Y]            " Filetype
+    set statusline+=\ [%{getcwd()}]          " Current dir
+    set statusline+=%=%-14.(%l,%c%V%)\ %p%%  " Right aligned file nav info
+endif
+
 "temp
 cnoremap pi PluginInstall
 cnoremap pls PluginList
@@ -480,7 +521,17 @@ nnoremap <c-f2> :NERDTreeToggle<CR>
 "==================================================
 "   airline config
 "==================================================
-let g:airline_detect_spell=1
+let g:airline_detect_spell=0
+let g:airline_powerline_fonts=1
+let g:airline_theme='light'
+
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#buffer_nr_show = 1
+
+" full path
+let g:airline_section_c = airline#section#create(['%F'])
 
 if !exists('g:airline_symbols')
     let g:airline_symbols = {}
@@ -497,15 +548,7 @@ let g:airline_symbols.paste = 'ρ'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
 
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#left_sep = '»'
-let g:airline#extensions#tabline#left_alt_sep = '|'
-let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
-"let g:airline_theme='dark'
-let g:airline_theme='light'
-"let g:airline_theme='molokai'
-
-let g:airline#extensions#bufferline#enabled = 0
+" let g:airline#extensions#bufferline#enabled = 0
 "==================================================
 "   nerdtree-git-plugin config
 "==================================================
@@ -527,6 +570,7 @@ let g:airline#extensions#bufferline#enabled = 0
 let g:user_emmet_leader_key='<C-e>' " c-e , 连打，注意逗号别忘记
 let g:user_emmet_install_global = 0
 autocmd FileType html,css EmmetInstall
+autocmd FileType css,html imap <tab> <plug>(emmet-expand-abbr)
 
 "==================================================
 "    neocompletecache config
@@ -703,10 +747,10 @@ let g:rbpt_colorpairs = [
             \ ]
 "let g:rbpt_max = 16
 let g:rbpt_loadcmd_toggle = 0
-au VimEnter * RainbowParenthesesToggle
-au Syntax * RainbowParenthesesLoadRound
-au Syntax * RainbowParenthesesLoadSquare
-au Syntax * RainbowParenthesesLoadBraces
+" au VimEnter * RainbowParenthesesToggle
+" au Syntax * RainbowParenthesesLoadRound
+" au Syntax * RainbowParenthesesLoadSquare
+" au Syntax * RainbowParenthesesLoadBraces
 
 "==================================================
 "   multiple-cursors config
@@ -755,9 +799,17 @@ let g:qs_second_occurrence_highlight_color = '#D40CDB'  " gui vim
 "==================================================
 "   syntastic config
 "==================================================
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
+
+let g:syntastic_error_symbol='✘'
+" let g:syntastic_warning_symbol='!'
+let g:syntastic_warning_symbol = "\u26A0"
+let g:syntastic_style_error_symbol='»'
+let g:syntastic_style_warning_symbol='•'
+" let g:syntastic_enable_highlighting = 0
+" let g:syntastic_javascript_checkers = ['eslint']
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
@@ -765,3 +817,21 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 
 let g:airline#extensions#syntastic#enabled = 1
+"==================================================
+
+" any help file is opened in vertical split
+autocmd FileType help wincmd L
+
+au BufWrite * :Autoformat
+
+" css del default color value with emmet
+autocmd FileType css inoremap dc <C-o>3x
+
+" javascript auto semicolon mapping
+autocmd FileType javascript inoremap ;<cr> <end>;<cr>
+autocmd FileType javascript inoremap ;; <down><end>;<cr>
+
+"inoremap ;<cr> <end>;<cr>
+"inoremap .<cr> <end>.
+"inoremap ;;<cr> <down><end>;<cr>
+"inoremap ..<cr> <down><end>.
