@@ -197,7 +197,7 @@ filetype plugin indent on
 " 设定doc文档目录
 let helptags=$VIM."/vimfiles/doc"
 set helplang=cn
-
+"set runtimepath+=D:\Vim\vimfiles\bundle\YouCompleteMe
 
 "========================================
 "   file set
@@ -216,7 +216,6 @@ source $VIMRUNTIME/delmenu.vim
 source $VIMRUNTIME/menu.vim
 language messages zh_CN.utf-8
 
-set helplang=cn
 "if v:lang =~? '^\(zh\)\|\(ja\)\|\(ko\)'
 "set ambiwidth=double
 "endif
@@ -704,20 +703,20 @@ endif
 "==================================================
 "   styles hignlight
 "==================================================
-" 设置标记一列的背景颜色和数字一行颜色一致
-hi! link SignColumn   LineNr
-hi! link ShowMarksHLl DiffAdd
-hi! link ShowMarksHLu DiffChange
+"" 设置标记一列的背景颜色和数字一行颜色一致
+"hi! link SignColumn   LineNr
+"hi! link ShowMarksHLl DiffAdd
+"hi! link ShowMarksHLu DiffChange
 
-" for error highlight，防止错误整行标红导致看不清
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-highlight clear SpellCap
-highlight SpellCap term=underline cterm=underline
-highlight clear SpellRare
-highlight SpellRare term=underline cterm=underline
-highlight clear SpellLocal
-highlight SpellLocal term=underline cterm=underline
+"" for error highlight，防止错误整行标红导致看不清
+"highlight clear SpellBad
+"highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+"highlight clear SpellCap
+"highlight SpellCap term=underline cterm=underline
+"highlight clear SpellRare
+"highlight SpellRare term=underline cterm=underline
+"highlight clear SpellLocal
+"highlight SpellLocal term=underline cterm=underline
 
 "==========================================
 " TEMP 设置, 尚未确定要不要
@@ -861,7 +860,6 @@ inoremap <expr><C-e>  neocomplcache#cancel_popup()
 "let g:neocomplcache_enable_auto_select = 1
 "let g:neocomplcache_disable_auto_complete = 1
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
-
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
